@@ -1,15 +1,18 @@
 <template>
   <div>pro-table</div>
+  <div>{{ count }}</div>
+  <el-button>I am ElButton</el-button>
 </template>
 
 <script lang="ts">
-export default {
-  name: '',
-  data() {
-    return {};
+export default defineComponent({
+  name: 'ProTable',
+  setup() {
+    const count = ref<number>(2);
+    return {
+      count,
+    };
   },
-  mounted() {},
-  methods: {},
-};
+});
 </script>
 <style lang="less" scoped></style>

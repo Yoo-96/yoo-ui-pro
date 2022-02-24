@@ -5,13 +5,15 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
-    "lint": "eslint . --ext .js,.ts,.vue --ignore-path .gitignore",
+    "lint": "eslint . --ext .js,.ts,.vue --ignore-path .eslintignore",
     "prepare": "husky install",
     "lint:style": "stylelint \"src/**/*.(vue|less|css)\" --customSyntax postcss-less"
   },
   "dependencies": {
     "element-plus": "^2.0.2",
     "path": "^0.12.7",
+    "unplugin-auto-import": "^0.6.1",
+    "unplugin-vue-components": "^0.17.20",
     "vue": "^3.2.16",
     "vue-router": "4"
   },
