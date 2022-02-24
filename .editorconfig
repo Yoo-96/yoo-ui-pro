@@ -1,0 +1,19 @@
+# Editor configuration, see http://editorconfig.org
+
+# 表示是最顶层的 EditorConfig 配置文件
+root = true
+
+# 匹配全部文件
+[*]
+# 缩进风格，可选"space"、"tab"
+indent_style = space
+# 缩进的空格树 2
+indent_size = 2
+# 结尾换行符，可选"if"、"or"、"orif"
+end_of_line = lf
+# 设置字符集
+charset = utf-8
+# 删除一行中的前后空格
+trim_trailing_whitespace = true
+# 在文件结尾插入新行
+insert_final_newline = true

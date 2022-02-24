@@ -1,0 +1,43 @@
+{
+  "name": "yoo-ui-pro",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview",
+    "lint": "eslint . --ext .js,.ts,.vue --ignore-path .gitignore",
+    "prepare": "husky install",
+    "lint:style": "stylelint \"src/**/*.(vue|less|css)\" --customSyntax postcss-less"
+  },
+  "dependencies": {
+    "element-plus": "^2.0.2",
+    "path": "^0.12.7",
+    "vue": "^3.2.16",
+    "vue-router": "4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "husky": "^7.0.4",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "lint-staged": "^11.2.6",
+    "postcss-html": "^1.2.0",
+    "postcss-less": "^5.0.0",
+    "prettier": "^2.4.1",
+    "stylelint": "^14.0.1",
+    "stylelint-config-recommended-vue": "^1.0.0",
+    "stylelint-config-standard": "^23.0.0",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.4",
+    "vue-tsc": "^0.3.0"
+  }
+}

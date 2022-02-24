@@ -1,0 +1,24 @@
+<template>
+  <router-view></router-view>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
+
+export default defineComponent({
+  setup() {
+    const router = useRouter();
+    const toPage = (name: string) => {
+      router.push({
+        name,
+      });
+    };
+    return {
+      toPage,
+    };
+  },
+});
+</script>
+
+<style></style>
