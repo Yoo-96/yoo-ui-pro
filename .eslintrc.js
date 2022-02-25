@@ -5,6 +5,10 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     ecmaVersion: 2020,
     sourceType: 'module',
+    ecmaFeatures: {
+      // 支持jsx语法
+      jsx: true,
+    },
   },
   rules: {
     'generator-star-spacing': 'off',
