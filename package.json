@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
-    "lint": "eslint . --ext .js,.ts,.vue --ignore-path .eslintignore",
+    "lint": "eslint . --ext .js,.ts,.tsx,.vue --ignore-path .eslintignore",
     "prepare": "husky install",
     "lint:style": "stylelint \"src/**/*.(vue|less|css)\" --customSyntax postcss-less"
   },
@@ -24,6 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^5.3.0",
     "@typescript-eslint/parser": "^5.3.0",
     "@vitejs/plugin-vue": "^1.9.3",
+    "@vitejs/plugin-vue-jsx": "^1.3.7",
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
