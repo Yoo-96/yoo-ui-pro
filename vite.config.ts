@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
-import AutoImport from 'unplugin-auto-import/vite';
+// import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -10,9 +10,10 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 export default defineConfig({
   plugins: [
     vue(),
-    AutoImport({
-      imports: ['vue', 'vue-router'],
-    }),
+    // 开启可以自动引入第三方库api
+    // AutoImport({
+    //   imports: ['vue', 'vue-router'],
+    // }),
     Components({
       resolvers: [ElementPlusResolver()],
     }),
