@@ -27,7 +27,7 @@ export default defineComponent({
       required: true,
       default: () => [],
     },
-    loadData: {
+    request: {
       type: Function,
       required: true,
     },
@@ -48,7 +48,7 @@ export default defineComponent({
   },
   setup(props, { attrs, expose }) {
     const ns = useNamespace('table');
-    const { columns, showToolbar, headerTitle, loadData, paginationConfig } = toRefs(props);
+    const { columns, showToolbar, headerTitle, request, paginationConfig } = toRefs(props);
     // 列表数据
     let localDataSource = ref<any[]>([]);
     // 列表加载
@@ -74,7 +74,7 @@ export default defineComponent({
         pageSize,
         currentPage,
       };
-      loadData
+      request
         .value(params)
         .then((res: listResultType) => {
           const { pageSize, currentPage, total, data } = res;

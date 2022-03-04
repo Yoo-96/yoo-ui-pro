@@ -5,7 +5,7 @@
     <pro-table
       ref="proTable"
       :columns="columns"
-      :load-data="getData"
+      :request="getData"
       show-toolbar
       header-title="ProTableExample"
       :pagination-config="{
