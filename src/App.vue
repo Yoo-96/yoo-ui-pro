@@ -1,21 +1,17 @@
 <template>
-  <router-view></router-view>
+  <el-config-provider :locale="locale">
+    <router-view></router-view>
+  </el-config-provider>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
+import zhCn from 'element-plus/lib/locale/lang/zh-cn';
 
 export default defineComponent({
   setup() {
-    const router = useRouter();
-    const toPage = (name: string) => {
-      router.push({
-        name,
-      });
-    };
     return {
-      toPage,
+      locale: zhCn,
     };
   },
 });

@@ -5,11 +5,18 @@
 declare module 'vue' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElSpace: typeof import('element-plus/es')['ElSpace']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
+    Pagination: typeof import('./src/components/ProTable/components/Pagination/index.vue')['default']
     ProTable: typeof import('./src/components/ProTable/index.vue')['default']
-    Table: typeof import('./src/components/ProTable/components/Table.vue')['default']
+    Table: typeof import('./src/components/ProTable/components/TableList/Table.vue')['default']
+    TableList: typeof import('./src/components/ProTable/components/TableList/index.vue')['default']
+    Toolbar: typeof import('./src/components/ProTable/components/Toolbar/index.vue')['default']
   }
 }
 

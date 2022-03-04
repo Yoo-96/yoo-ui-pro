@@ -20,7 +20,7 @@
     "indentation": 2,
     "no-eol-whitespace": true,
     "string-no-newline": null,
-    "string-quotes": "double",
+    "string-quotes": "single",
     "at-rule-no-unknown": [ true, {
       "ignoreAtRules": [
         "/-/"

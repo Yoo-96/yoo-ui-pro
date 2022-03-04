@@ -10,6 +10,7 @@
     "lint:style": "stylelint \"src/**/*.(vue|less|css)\" --customSyntax postcss-less"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^1.0.0",
     "element-plus": "^2.0.2",
     "path": "^0.12.7",
     "unplugin-auto-import": "^0.6.1",
