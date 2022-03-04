@@ -9,6 +9,8 @@
 
 # 已开发组件
 
+- [ProTable](./docs/ProTable.md)
+
 # 仓库地址
 
 [github](https://github.com/Yoo-96/yoo-ui-pro)，欢迎使用和点亮小星星。
