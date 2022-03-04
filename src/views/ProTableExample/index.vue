@@ -19,9 +19,10 @@
 </template>
 
 <script lang="tsx">
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { UserRequestResultType } from '@/types/user';
 import { fetchUsetList } from '@/api/user';
+import { UserInfoType } from '@/types/user';
 
 export default defineComponent({
   name: 'ProTableExample',
