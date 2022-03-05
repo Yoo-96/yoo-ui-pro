@@ -5,8 +5,9 @@
  * @Date: 2022-03-04 15:55:49
  * @Description:
  */
-import { defineComponent, toRefs } from 'vue';
+import { defineComponent, toRefs, ref } from 'vue';
 import useNamespace from '@/hooks/use-namespace';
+import type { ElTable } from 'element-plus';
 
 export default defineComponent({
   name: 'Table',
@@ -24,14 +25,25 @@ export default defineComponent({
       default: false,
     },
   },
-  setup(props) {
+  setup(props, { expose }) {
+    const proTableRef = ref<InstanceType<typeof ElTable>>();
     const ns = useNamespace('table');
     const { dataSource, columns, loading } = toRefs(props);
+
+    // 清空选中
+    const clearSelection = () => {
+      proTableRef.value?.clearSelection();
+    };
+
+    // 对外暴露属性和方法
+    expose({
+      clearSelection,
+    });
 
     return () => {
       return (
         <div class={ns.b('list')}>
-          <el-table data={dataSource.value} v-loading={loading.value}>
+          <el-table ref="proTableRef" data={dataSource.value} v-loading={loading.value}>
             {(columns.value || []).map((column: any) => {
               const { render, ...restColumn } = column;
 

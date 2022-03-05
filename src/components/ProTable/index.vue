@@ -48,6 +48,8 @@ export default defineComponent({
   },
   setup(props, { attrs, expose }) {
     const ns = useNamespace('table');
+    const proTableRef = ref();
+
     const { columns, showToolbar, headerTitle, request, paginationConfig } = toRefs(props);
     // 列表数据
     let localDataSource = ref<any[]>([]);
@@ -69,6 +71,7 @@ export default defineComponent({
 
     // 请求数据
     const fetchData = ({ pageSize = 10, currentPage = 1 }) => {
+      clearSelection();
       loading.value = true;
       const params = {
         pageSize,
@@ -107,9 +110,15 @@ export default defineComponent({
       fetchData(params);
     };
 
+    // 清空选中
+    const clearSelection = () => {
+      proTableRef.value?.clearSelection();
+    };
+
     // 对外暴露属性和方法
     expose({
       refresh,
+      clearSelection,
     });
 
     return () => {
@@ -118,6 +127,7 @@ export default defineComponent({
           {showToolbar.value && <ProTableToolbar headerTitle={headerTitle.value} />}
 
           <ProTableList
+            ref="proTableRef"
             dataSource={localDataSource.value}
             columns={tableColumns.value}
             loading={loading.value}

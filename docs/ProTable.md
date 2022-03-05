@@ -49,4 +49,5 @@ ProTable 是基于 [element-plus table](https://element-plus.org/zh-CN/component
 | 名称               | 说明              | 参数                  |
 | :---------------- | :---------------- | :------------------- |
 | refresh   | 刷新列表数据    | `reset?: boolean` 是否刷新返回第一页        |
+| clearSelection | 用于多选表格，清空用户的选择 | - |
 

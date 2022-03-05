@@ -31,6 +31,10 @@ export default defineComponent({
 
     const columns = [
       {
+        type: 'selection',
+        width: 50,
+      },
+      {
         type: 'index',
         prop: 'index',
         label: '序号',
