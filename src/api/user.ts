@@ -17,10 +17,13 @@ export const fetchUsetList = async (params: any): Promise<UserRequestResultType>
     }
     setTimeout(() => {
       resolve({
-        data,
-        total: 20,
-        currentPage: params.currentPage,
-        pageSize: params.pageSize,
+        result: {
+          data,
+          total: 20,
+          currentPage: params.currentPage,
+          pageSize: params.pageSize,
+        },
+        success: true,
       });
     }, 1000);
   });

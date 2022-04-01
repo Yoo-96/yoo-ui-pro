@@ -6,11 +6,51 @@ ProTable 是基于 [element-plus table](https://element-plus.org/zh-CN/component
 
 ## API
 
+### request
+
+```js
+<template>
+<pro-table
+  ref="proTable"
+  :request="getData"
+>
+</template>
+<script lang="tsx">
+export default defineComponent({
+  setup() {
+    const getData = async (params: { [key: string]: any }) => {
+      // params 中一定会有 pageSize 和 currentPage 两个参数
+      const {
+        success,
+        result: { pageSize, currentPage, total, data },
+      }: UserRequestResultType = await fetchUsetList(params);
+      return {
+        // 每页条数（非必须）
+        pageSize,
+        // 当前页（非必须）
+        currentPage,
+        // 数据总数
+        total,
+        // 数据源
+        data,
+        // 请求成功标识，true为成功，才会加载数据
+        success,
+      };
+    };
+
+    return {
+      getData,
+    };
+  }
+});
+</script>
+```
+
 ### ProTable
 
 | 参数               | 说明              | 类型                 | 是否必填           | 默认值             |
 | :---------------- | :---------------- | :------------------- | :----------------- | :-------------- |
-| request           | 列表数据请求 | `(params: {pageSize,currentPage}) => {pageSize, currentPage, total, data}` | 是 | - |
+| request           | 列表数据请求 | `(params: {pageSize,currentPage}) => {pageSize, currentPage, total, data, success}` | 是 | - |
 | columns           | Columns 列定义，详情见下文               | 是                  | -              |
 
 ### Columns 列定义

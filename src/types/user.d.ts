@@ -10,6 +10,4 @@ export interface UserInfoType {
   address: string;
 }
 
-export interface UserRequestResultType extends listResultType {
-  data: UserInfoType[];
-}
+export interface UserRequestResultType extends listResultType {}

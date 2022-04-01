@@ -5,10 +5,11 @@
  * @Description:
  */
 export interface listResultType {
-  data: any[];
+  data: { [key: string]: any };
   total: number;
   currentPage: number;
   pageSize: number;
+  success: boolean;
 }
 
 export interface localPagination {

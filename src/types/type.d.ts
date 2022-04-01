@@ -1,5 +1,9 @@
 export interface listResultType {
-  total: number;
-  currentPage: number;
-  pageSize: number;
+  result: {
+    data: { [key: string]: any };
+    total: number;
+    currentPage: number;
+    pageSize: number;
+  };
+  success: true;
 }

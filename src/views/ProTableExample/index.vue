@@ -96,9 +96,18 @@ export default defineComponent({
       },
     ];
 
-    const getData = async (params: any) => {
-      const result: UserRequestResultType = await fetchUsetList(params);
-      return result;
+    const getData = async (params: { [key: string]: any }) => {
+      const {
+        success,
+        result: { pageSize, currentPage, total, data },
+      }: UserRequestResultType = await fetchUsetList(params);
+      return {
+        pageSize,
+        currentPage,
+        total,
+        data,
+        success,
+      };
     };
 
     // 触发表格刷新

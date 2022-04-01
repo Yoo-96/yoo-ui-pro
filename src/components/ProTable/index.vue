@@ -52,7 +52,7 @@ export default defineComponent({
 
     const { columns, showToolbar, headerTitle, request, paginationConfig } = toRefs(props);
     // 列表数据
-    let localDataSource = ref<any[]>([]);
+    let localDataSource = ref<{ [key: string]: any }>([]);
     // 列表加载
     let loading = ref<boolean>(false);
     // 数据总量
@@ -79,13 +79,16 @@ export default defineComponent({
       request
         .value(params)
         .then((res: listResultType) => {
-          const { pageSize, currentPage, total, data } = res;
-          localDataSource.value = data;
-          dataTotal.value = total;
-          localPagination = {
-            pageSize,
-            currentPage,
-          };
+          const { total, data, success, ...rest } = res;
+
+          if (success) {
+            localDataSource.value = data;
+            dataTotal.value = total;
+            localPagination = {
+              pageSize: rest.pageSize || pageSize,
+              currentPage: rest.currentPage || currentPage,
+            };
+          }
         })
         .finally(() => {
           loading.value = false;
