@@ -71,7 +71,6 @@ export default defineComponent({
 
     // 请求数据
     const fetchData = ({ pageSize = 10, currentPage = 1 }) => {
-      clearSelection();
       loading.value = true;
       const params = {
         pageSize,
@@ -127,7 +126,7 @@ export default defineComponent({
           {showToolbar.value && <ProTableToolbar headerTitle={headerTitle.value} />}
 
           <ProTableList
-            ref="proTableRef"
+            ref={proTableRef}
             dataSource={localDataSource.value}
             columns={tableColumns.value}
             loading={loading.value}

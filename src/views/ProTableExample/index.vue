@@ -2,6 +2,7 @@
   <div class="example">
     <el-button @click="onRefresh(false)">当前页刷新</el-button>
     <el-button @click="onRefresh(true)">刷新并返回首页</el-button>
+    <el-button @click="onClearSelection()">清空多选</el-button>
     <pro-table
       ref="proTable"
       :columns="columns"
@@ -105,11 +106,17 @@ export default defineComponent({
       proTable.value.refresh(reset);
     };
 
+    // 清空表格多选
+    const onClearSelection = () => {
+      proTable.value.clearSelection();
+    };
+
     return {
       proTable,
       columns,
       getData,
       onRefresh,
+      onClearSelection,
     };
   },
 });

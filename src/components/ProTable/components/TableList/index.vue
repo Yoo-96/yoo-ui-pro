@@ -43,7 +43,7 @@ export default defineComponent({
     return () => {
       return (
         <div class={ns.b('list')}>
-          <el-table ref="proTableRef" data={dataSource.value} v-loading={loading.value}>
+          <el-table ref={proTableRef} data={dataSource.value} v-loading={loading.value}>
             {(columns.value || []).map((column: any) => {
               const { render, ...restColumn } = column;
 
