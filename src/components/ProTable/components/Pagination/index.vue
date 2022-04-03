@@ -7,13 +7,13 @@
  */
 import { defineComponent, PropType, toRefs, computed } from 'vue';
 import useNamespace from '@/hooks/use-namespace';
-import { localPagination } from '../../types';
+import { LocalPagination } from '../../types';
 
 export default defineComponent({
   name: 'Pagination',
   props: {
     pagination: {
-      type: Object as PropType<localPagination>,
+      type: Object as PropType<LocalPagination>,
       default: () => {
         return {
           pageSize: 10,
