@@ -21,7 +21,7 @@
 
 <script lang="tsx">
 import { defineComponent, ref } from 'vue';
-import { UserRequestResultType } from '@/types/user';
+import { UserRequestResultType, RequestData } from '@/types/user';
 import { fetchUsetList } from '@/api/user';
 import { UserInfoType } from '@/types/user';
 
@@ -96,7 +96,7 @@ export default defineComponent({
       },
     ];
 
-    const getData = async (params: { [key: string]: any }) => {
+    const getData = async (params: { [key: string]: any }): Promise<RequestData> => {
       const {
         success,
         result: { pageSize, currentPage, total, data },

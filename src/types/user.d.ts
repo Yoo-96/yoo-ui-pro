@@ -10,4 +10,12 @@ export interface UserInfoType {
   address: string;
 }
 
-export interface UserRequestResultType extends listResultType {}
+export interface UserRequestResultType extends listResultType<UserInfoType> {}
+
+export interface RequestData {
+  pageSize?: number;
+  currentPage?: number;
+  total: number;
+  data: UserInfoType[];
+  success: boolean;
+}

@@ -5,12 +5,12 @@
  * @Date: 2022-03-04 15:54:33
  * @Description:
  */
-import { defineComponent, toRefs, onMounted, computed, ref, reactive } from 'vue';
+import { defineComponent, toRefs, onMounted, computed, ref, reactive, PropType } from 'vue';
 import ProTableList from './components/TableList/index.vue';
 import ProTableToolbar from './components/Toolbar/index.vue';
 import ProTablePagination from './components/Pagination/index.vue';
 import useNamespace from '@/hooks/use-namespace';
-import { listResultType, localPagination } from './types';
+import type { LocalPagination, RequestData, RequestType } from './types';
 
 export default defineComponent({
   name: 'ProTable',
@@ -28,7 +28,7 @@ export default defineComponent({
       default: () => [],
     },
     request: {
-      type: Function,
+      type: Function as PropType<RequestType>,
       required: true,
     },
 
@@ -52,13 +52,13 @@ export default defineComponent({
 
     const { columns, showToolbar, headerTitle, request, paginationConfig } = toRefs(props);
     // 列表数据
-    let localDataSource = ref<{ [key: string]: any }>([]);
+    let localDataSource = ref<any[]>([]);
     // 列表加载
     let loading = ref<boolean>(false);
     // 数据总量
     let dataTotal = ref<number>(0);
     // 分页信息
-    let localPagination = reactive<localPagination>({ pageSize: 10, currentPage: 1 });
+    let localPagination = reactive<LocalPagination>({ pageSize: 10, currentPage: 1 });
 
     // 计算列配置
     const tableColumns = computed(() => {
@@ -78,7 +78,7 @@ export default defineComponent({
       };
       request
         .value(params)
-        .then((res: listResultType) => {
+        .then((res: RequestData<any>) => {
           const { total, data, success, ...rest } = res;
 
           if (success) {

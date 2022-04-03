@@ -1,6 +1,6 @@
-export interface listResultType {
+export interface listResultType<T> {
   result: {
-    data: { [key: string]: any };
+    data: T[];
     total: number;
     currentPage: number;
     pageSize: number;

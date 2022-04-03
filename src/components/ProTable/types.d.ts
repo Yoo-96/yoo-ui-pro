@@ -4,7 +4,7 @@
  * @Date: 2022-03-04 15:54:14
  * @Description:
  */
-export interface listResultType {
+export interface ListResultType {
   data: { [key: string]: any };
   total: number;
   currentPage: number;
@@ -12,7 +12,20 @@ export interface listResultType {
   success: boolean;
 }
 
-export interface localPagination {
+export interface LocalPagination {
   currentPage: number;
   pageSize: number;
 }
+
+export interface RequestData<T> {
+  pageSize?: number;
+  currentPage?: number;
+  total: number;
+  data: T[];
+  success: boolean;
+}
+
+export type RequestType = (params: {
+  pageSize: number;
+  currentPage: number;
+}) => Promise<RequestData<any>>;
