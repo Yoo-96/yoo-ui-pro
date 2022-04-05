@@ -126,7 +126,9 @@ export default defineComponent({
     return () => {
       return (
         <div class={ns.b()}>
-          {showToolbar.value && <ProTableToolbar headerTitle={headerTitle.value} />}
+          {showToolbar.value && (
+            <ProTableToolbar headerTitle={headerTitle.value} onRefresh={refresh} />
+          )}
 
           <ProTableList
             ref={proTableRef}

@@ -11,6 +11,7 @@ declare module 'vue' {
     ElSpace: typeof import('element-plus/es')['ElSpace']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    FullScreenIcon: typeof import('./src/components/FullScreenIcon/index.vue')['default']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
     Pagination: typeof import('./src/components/ProTable/components/Pagination/index.vue')['default']
     ProTable: typeof import('./src/components/ProTable/index.vue')['default']

@@ -6,14 +6,15 @@
  * @Description:
  */
 import { defineComponent, toRefs } from 'vue';
-import { RefreshRight, FullScreen, Setting } from '@element-plus/icons-vue';
+import { RefreshRight, Setting } from '@element-plus/icons-vue';
+import FullScreenIcon from '@/components/FullScreenIcon/index.vue';
 import useNamespace from '@/hooks/use-namespace';
 
 export default defineComponent({
   name: 'ProTableToolbar',
   components: {
     RefreshRight,
-    FullScreen,
+    FullScreenIcon,
     Setting,
   },
   props: {
@@ -22,9 +23,15 @@ export default defineComponent({
       default: '',
     },
   },
-  setup(props) {
+  emits: ['refresh'],
+  setup(props, { emit }) {
     const ns = useNamespace('table');
     const { headerTitle } = toRefs(props);
+
+    // 刷新列表
+    const onRefresh = () => {
+      emit('refresh', false);
+    };
 
     return () => {
       return (
@@ -35,12 +42,12 @@ export default defineComponent({
               <el-button type="primary">Primary</el-button>
               <div class={ns.be('toolbar', 'setting')}>
                 <el-space size={8}>
-                  <el-icon>
+                  <el-icon onClick={onRefresh}>
                     <refresh-right />
                   </el-icon>
-                  <el-icon>
-                    <full-screen />
-                  </el-icon>
+
+                  <FullScreenIcon />
+
                   <el-icon>
                     <setting />
                   </el-icon>
