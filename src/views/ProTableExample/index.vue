@@ -8,6 +8,10 @@
       :columns="columns"
       :request="getData"
       row-key="id"
+      :toolbar="{
+        show: true,
+        title: 'ProTableExample',
+      }"
       show-toolbar
       header-title="ProTableExample"
       :pagination-config="{

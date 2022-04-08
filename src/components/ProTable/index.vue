@@ -10,7 +10,7 @@ import ProTableList from './components/TableList/index.vue';
 import ProTableToolbar from './components/Toolbar/index.vue';
 import ProTablePagination from './components/Pagination/index.vue';
 import useNamespace from '@/hooks/use-namespace';
-import type { LocalPagination, RequestData, RequestType } from './types';
+import type { LocalPagination, RequestData, RequestType, ToolbarType } from './types';
 import { DEFAULT_ROW_KEY } from './const';
 
 export default defineComponent({
@@ -38,14 +38,12 @@ export default defineComponent({
     },
 
     // -------- 工具栏模块属性 --------
-    showToolbar: {
-      type: Boolean,
-      default: true,
+    toolbar: {
+      type: Object as PropType<ToolbarType>,
+      default: () => {},
     },
-    headerTitle: {
-      type: String,
-      default: '',
-    },
+
+    // -------- 分页模块属性 --------
     paginationConfig: {
       type: Object,
       default: () => {},
@@ -55,7 +53,7 @@ export default defineComponent({
     const ns = useNamespace('table');
     const proTableRef = ref();
 
-    const { columns, showToolbar, headerTitle, request, paginationConfig, rowKey } = toRefs(props);
+    const { columns, toolbar, request, paginationConfig, rowKey } = toRefs(props);
     // 列表数据
     let localDataSource = ref<any[]>([]);
     // 列表加载
@@ -134,10 +132,10 @@ export default defineComponent({
     return () => {
       return (
         <div class={ns.b()}>
-          {showToolbar.value && (
+          {toolbar.value.show && (
             <ProTableToolbar
+              toolbar={toolbar.value}
               columns={columns.value}
-              headerTitle={headerTitle.value}
               onRefresh={refresh}
               onUpdateColumns={handleUpdateColumns}
             />

@@ -51,8 +51,10 @@ export default defineComponent({
 | 参数               | 说明              | 类型                 | 是否必填           | 默认值             |
 | :---------------- | :---------------- | :------------------- | :----------------- | :-------------- |
 | request           | 列表数据请求 | `(params: {pageSize,currentPage}) => {pageSize, currentPage, total, data, success}` | 是 | - |
-| columns           | Columns 列定义，详情见下文               | 是                  | -              |
-
+| row-key           | 表格行 `key` 的取值               | `string`                  | 否              | id |
+| columns           | Columns 列定义，详情见下文               | `any[]`                  | 是              |
+| toolbar           | Toolbar 工具栏配置属性，详情见下文        | `ToolbarType`      | 否              |
+| pagination-config | Pagination 分页栏配置属性，详情见下文     | -     | 否              |
 ### Columns 列定义
 
 支持 [table](https://element-plus.org/zh-CN/component/table.html#table-column-attributes) 组件列配置属性
@@ -70,8 +72,8 @@ export default defineComponent({
 
 | 参数               | 说明              | 类型                 | 是否必填           | 默认值             |
 | :---------------- | :---------------- | :------------------- | :----------------- | :-------------- |
-| showToolbar           | 是否显示工具栏               | `boolean`                | 是               | `false` |
-| headerTitle           | 表格标题               | `string`                | 否               | - |
+| show           | 是否显示工具栏               | `boolean`                | 是               | - |
+| title           | 表格标题               | `string`                | 否               | - |
 
 ### 表格列表
 

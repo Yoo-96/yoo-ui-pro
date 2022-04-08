@@ -29,3 +29,8 @@ export type RequestType = (params: {
   pageSize: number;
   currentPage: number;
 }) => Promise<RequestData<any>>;
+
+export interface ToolbarType {
+  show: boolean;
+  title?: string;
+}
