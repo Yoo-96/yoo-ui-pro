@@ -6,16 +6,22 @@
  * @Description:
  */
 import { defineComponent, toRefs } from 'vue';
-import { RefreshRight, Setting } from '@element-plus/icons-vue';
+import { RefreshRight } from '@element-plus/icons-vue';
 import FullScreenIcon from '@/components/FullScreenIcon/index.vue';
+import ColumnsSetup from '../ColumnsSetup/index.vue';
 import useNamespace from '@/hooks/use-namespace';
+
+interface TProps {
+  headerTitle: string;
+  columns: any[];
+}
 
 export default defineComponent({
   name: 'ProTableToolbar',
   components: {
     RefreshRight,
     FullScreenIcon,
-    Setting,
+    ColumnsSetup,
   },
   props: {
     headerTitle: {
@@ -24,7 +30,7 @@ export default defineComponent({
     },
   },
   emits: ['refresh'],
-  setup(props, { emit }) {
+  setup(props, { emit, attrs }) {
     const ns = useNamespace('table');
     const { headerTitle } = toRefs(props);
 
@@ -40,7 +46,7 @@ export default defineComponent({
           <div class={ns.be('toolbar', 'right')}>
             <el-space size={12}>
               <el-button type="primary">Primary</el-button>
-              <div class={ns.be('toolbar', 'setting')}>
+              <div class={ns.be('toolbar', 'operation')}>
                 <el-space size={8}>
                   <el-icon onClick={onRefresh}>
                     <refresh-right />
@@ -48,9 +54,7 @@ export default defineComponent({
 
                   <FullScreenIcon />
 
-                  <el-icon>
-                    <setting />
-                  </el-icon>
+                  <ColumnsSetup {...attrs} />
                 </el-space>
               </div>
             </el-space>

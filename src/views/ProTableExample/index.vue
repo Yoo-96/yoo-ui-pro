@@ -7,6 +7,7 @@
       ref="proTable"
       :columns="columns"
       :request="getData"
+      row-key="id"
       show-toolbar
       header-title="ProTableExample"
       :pagination-config="{
@@ -34,10 +35,10 @@ export default defineComponent({
       {
         type: 'selection',
         width: 50,
+        label: '列选择',
       },
       {
         type: 'index',
-        prop: 'index',
         label: '序号',
         width: 80,
       },

@@ -5,12 +5,13 @@
  * @Date: 2022-03-04 15:54:33
  * @Description:
  */
-import { defineComponent, toRefs, onMounted, computed, ref, reactive, PropType } from 'vue';
+import { defineComponent, toRefs, onMounted, computed, ref, reactive, PropType, watch } from 'vue';
 import ProTableList from './components/TableList/index.vue';
 import ProTableToolbar from './components/Toolbar/index.vue';
 import ProTablePagination from './components/Pagination/index.vue';
 import useNamespace from '@/hooks/use-namespace';
 import type { LocalPagination, RequestData, RequestType } from './types';
+import { DEFAULT_ROW_KEY } from './const';
 
 export default defineComponent({
   name: 'ProTable',
@@ -31,6 +32,10 @@ export default defineComponent({
       type: Function as PropType<RequestType>,
       required: true,
     },
+    rowKey: {
+      type: String,
+      default: DEFAULT_ROW_KEY,
+    },
 
     // -------- 工具栏模块属性 --------
     showToolbar: {
@@ -46,11 +51,11 @@ export default defineComponent({
       default: () => {},
     },
   },
-  setup(props, { attrs, expose }) {
+  setup(props, { expose }) {
     const ns = useNamespace('table');
     const proTableRef = ref();
 
-    const { columns, showToolbar, headerTitle, request, paginationConfig } = toRefs(props);
+    const { columns, showToolbar, headerTitle, request, paginationConfig, rowKey } = toRefs(props);
     // 列表数据
     let localDataSource = ref<any[]>([]);
     // 列表加载
@@ -60,10 +65,13 @@ export default defineComponent({
     // 分页信息
     let localPagination = reactive<LocalPagination>({ pageSize: 10, currentPage: 1 });
 
-    // 计算列配置
-    const tableColumns = computed(() => {
-      return columns.value;
-    });
+    // -------- 计算列配置开始 --------
+    let currentColumns = ref<any>([]); // 需要显示的列
+
+    const handleUpdateColumns = (value: any[]) => {
+      currentColumns.value = value;
+    };
+    // -------- 计算列配置结束 --------
 
     onMounted(() => {
       fetchData(localPagination);
@@ -127,15 +135,23 @@ export default defineComponent({
       return (
         <div class={ns.b()}>
           {showToolbar.value && (
-            <ProTableToolbar headerTitle={headerTitle.value} onRefresh={refresh} />
+            <ProTableToolbar
+              columns={columns.value}
+              headerTitle={headerTitle.value}
+              onRefresh={refresh}
+              onUpdateColumns={handleUpdateColumns}
+            />
           )}
 
-          <ProTableList
-            ref={proTableRef}
-            dataSource={localDataSource.value}
-            columns={tableColumns.value}
-            loading={loading.value}
-          />
+          {currentColumns.value.length > 0 && (
+            <ProTableList
+              rowKey={rowKey.value}
+              ref={proTableRef}
+              dataSource={localDataSource.value}
+              columns={currentColumns.value}
+              loading={loading.value}
+            />
+          )}
 
           <ProTablePagination
             paginationConfig={paginationConfig}

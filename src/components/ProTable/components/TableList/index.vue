@@ -8,9 +8,10 @@
 import { defineComponent, toRefs, ref } from 'vue';
 import useNamespace from '@/hooks/use-namespace';
 import type { ElTable } from 'element-plus';
+import { DEFAULT_ROW_KEY } from '../../const';
 
 export default defineComponent({
-  name: 'Table',
+  name: 'TableList',
   props: {
     columns: {
       type: Array,
@@ -24,11 +25,15 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    rowKey: {
+      type: String,
+      default: DEFAULT_ROW_KEY,
+    },
   },
   setup(props, { expose }) {
     const proTableRef = ref<InstanceType<typeof ElTable>>();
     const ns = useNamespace('table');
-    const { dataSource, columns, loading } = toRefs(props);
+    const { dataSource, columns, loading, rowKey } = toRefs(props);
 
     // 清空选中
     const clearSelection = () => {
@@ -43,13 +48,19 @@ export default defineComponent({
     return () => {
       return (
         <div class={ns.b('list')}>
-          <el-table ref={proTableRef} data={dataSource.value} v-loading={loading.value}>
+          <el-table
+            ref={proTableRef}
+            data={dataSource.value}
+            rowKey={rowKey.value}
+            v-loading={loading.value}
+          >
             {(columns.value || []).map((column: any) => {
               const { render, ...restColumn } = column;
 
               if (typeof render === 'function') {
                 return (
                   <el-table-column
+                    key={restColumn.prop}
                     {...restColumn}
                     v-slots={{
                       default: (scope: any) =>
@@ -58,7 +69,7 @@ export default defineComponent({
                   />
                 );
               }
-              return <el-table-column {...restColumn} />;
+              return <el-table-column key={restColumn.prop} {...restColumn} />;
             })}
           </el-table>
         </div>

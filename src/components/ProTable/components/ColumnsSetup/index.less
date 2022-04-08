@@ -1,0 +1,28 @@
+.y-pro-table-columns-setup {
+  &__poppver {
+    padding: 0 !important;
+    box-sizing: border-box;
+
+    .el-checkbox {
+      display: flex;
+      align-items: flex-start;
+
+      &__label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &__header {
+    padding: 18px 12px 0;
+    border-bottom: 1px solid #dcdfe6;
+  }
+
+  &__content {
+    max-height: 300px;
+    padding: 18px 12px 0 32px;
+    overflow-y: auto;
+  }
+}
