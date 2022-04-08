@@ -12,8 +12,6 @@
         show: true,
         title: 'ProTableExample',
       }"
-      show-toolbar
-      header-title="ProTableExample"
       :pagination-config="{
         pageSizes: [10, 20, 30, 40],
         layout: 'total, sizes, prev, pager, next, jumper',
