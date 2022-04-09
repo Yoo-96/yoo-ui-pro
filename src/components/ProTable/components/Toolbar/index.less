@@ -6,11 +6,18 @@
   padding: 16px;
 
   &__setting {
-    .el-icon {
-      cursor: pointer;
+    .el {
+      &-space__item {
+        height: 20px;
+        line-height: 20px;
+      }
 
-      &:hover {
-        color: @primary-color;
+      &-icon {
+        cursor: pointer;
+
+        &:hover {
+          color: @primary-color;
+        }
       }
     }
   }

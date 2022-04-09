@@ -11,6 +11,7 @@
       :toolbar="{
         show: true,
         title: 'ProTableExample',
+        setting: ['refresh', 'fullScreen', 'columnsSetup'],
       }"
       :pagination-config="{
         pageSizes: [10, 20, 30, 40],

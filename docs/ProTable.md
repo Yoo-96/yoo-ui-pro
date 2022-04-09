@@ -74,6 +74,7 @@ export default defineComponent({
 | :---------------- | :---------------- | :------------------- | :----------------- | :-------------- |
 | show           | 是否显示工具栏               | `boolean`                | 是               | - |
 | title           | 表格标题               | `string`                | 否               | - |
+| setting           | 操作区icon功能设置               | ` ('refresh' | 'fullScreen' | 'columnsSetup')[]`                | 否               | - |
 
 ### 表格列表
 

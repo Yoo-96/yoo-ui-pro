@@ -33,4 +33,5 @@ export type RequestType = (params: {
 export interface ToolbarType {
   show: boolean;
   title?: string;
+  setting?: ('refresh' | 'fullScreen' | 'columnsSetup')[];
 }
