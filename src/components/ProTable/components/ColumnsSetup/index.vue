@@ -5,7 +5,7 @@
  * @Date: 2022-04-05 11:19:05
  * @Description:
  */
-import { defineComponent, toRefs, ref, onMounted, watch } from 'vue';
+import { defineComponent, ref, onMounted, watch, inject } from 'vue';
 import { Setting } from '@element-plus/icons-vue';
 import useNamespace from '@/hooks/use-namespace';
 import { SELECTION_COLUMN_KEY, INDEX_COLUMN_KEY } from '../../const';
@@ -15,17 +15,10 @@ export default defineComponent({
   components: {
     Setting,
   },
-  props: {
-    columns: {
-      type: Array,
-      required: true,
-      default: () => [],
-    },
-  },
   emits: ['updateColumns'],
   setup(props, { emit }) {
     const ns = useNamespace('table');
-    const { columns } = toRefs(props);
+    const columns = inject('columns') as any[];
     const checkAll = ref(true);
     const isIndeterminate = ref(false);
     const checkedColumns = ref<string[]>([]);
@@ -33,7 +26,7 @@ export default defineComponent({
 
     onMounted(() => {
       watch(
-        () => columns.value,
+        () => columns,
         (val) => {
           setLocalColumns(val);
         },

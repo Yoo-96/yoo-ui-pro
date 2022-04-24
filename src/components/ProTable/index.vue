@@ -5,7 +5,7 @@
  * @Date: 2022-03-04 15:54:33
  * @Description:
  */
-import { defineComponent, toRefs, onMounted, computed, ref, reactive, PropType, watch } from 'vue';
+import { defineComponent, toRefs, onMounted, ref, reactive, PropType, provide } from 'vue';
 import ProTableList from './components/TableList/index.vue';
 import ProTableToolbar from './components/Toolbar/index.vue';
 import ProTablePagination from './components/Pagination/index.vue';
@@ -54,6 +54,8 @@ export default defineComponent({
     const proTableRef = ref();
 
     const { columns, toolbar, request, paginationConfig, rowKey } = toRefs(props);
+    provide('columns', columns.value);
+
     // 列表数据
     let localDataSource = ref<any[]>([]);
     // 列表加载
@@ -135,7 +137,6 @@ export default defineComponent({
           {toolbar.value.show && (
             <ProTableToolbar
               toolbar={toolbar.value}
-              columns={columns.value}
               onRefresh={refresh}
               onUpdateColumns={handleUpdateColumns}
             />
