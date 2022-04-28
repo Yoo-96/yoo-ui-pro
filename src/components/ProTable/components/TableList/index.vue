@@ -5,16 +5,17 @@
  * @Date: 2022-03-04 15:55:49
  * @Description:
  */
-import { defineComponent, toRefs, ref } from 'vue';
+import { defineComponent, toRefs, ref, PropType } from 'vue';
 import useNamespace from '@/hooks/use-namespace';
 import type { ElTable } from 'element-plus';
 import { DEFAULT_ROW_KEY } from '../../const';
+import type { TableColumnType } from '../../types';
 
 export default defineComponent({
   name: 'TableList',
   props: {
     columns: {
-      type: Array,
+      type: Array as PropType<TableColumnType[]>,
       default: () => [],
     },
     dataSource: {
@@ -54,7 +55,7 @@ export default defineComponent({
             rowKey={rowKey.value}
             v-loading={loading.value}
           >
-            {(columns.value || []).map((column: any) => {
+            {(columns.value || []).map((column: TableColumnType) => {
               const { render, ...restColumn } = column;
 
               if (typeof render === 'function') {

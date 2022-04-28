@@ -35,3 +35,9 @@ export interface ToolbarType {
   title?: string;
   setting?: ('refresh' | 'fullScreen' | 'columnsSetup')[];
 }
+
+// todo elementPlus 没有导出，临时处理
+type ElementColumnType = any;
+export interface TableColumnType extends ElementColumnType {
+  isSearch?: boolean;
+}

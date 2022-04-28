@@ -9,8 +9,15 @@ import { defineComponent, toRefs, onMounted, ref, reactive, PropType, provide } 
 import ProTableList from './components/TableList/index.vue';
 import ProTableToolbar from './components/Toolbar/index.vue';
 import ProTablePagination from './components/Pagination/index.vue';
+import SearchBar from './components/SearchBar/index.vue';
 import useNamespace from '@/hooks/use-namespace';
-import type { LocalPagination, RequestData, RequestType, ToolbarType } from './types';
+import type {
+  LocalPagination,
+  RequestData,
+  RequestType,
+  ToolbarType,
+  TableColumnType,
+} from './types';
 import { DEFAULT_ROW_KEY } from './const';
 
 export default defineComponent({
@@ -19,12 +26,13 @@ export default defineComponent({
     ProTableList,
     ProTableToolbar,
     ProTablePagination,
+    SearchBar,
   },
   props: {
     // -------- 表格模块属性 --------
     // 表格列配置
     columns: {
-      type: Array,
+      type: Array as PropType<TableColumnType[]>,
       required: true,
       default: () => [],
     },
@@ -66,9 +74,9 @@ export default defineComponent({
     let localPagination = reactive<LocalPagination>({ pageSize: 10, currentPage: 1 });
 
     // -------- 计算列配置开始 --------
-    let currentColumns = ref<any>([]); // 需要显示的列
+    let currentColumns = ref<TableColumnType>([]); // 需要显示的列
 
-    const handleUpdateColumns = (value: any[]) => {
+    const handleUpdateColumns = (value: TableColumnType[]) => {
       currentColumns.value = value;
     };
     // -------- 计算列配置结束 --------

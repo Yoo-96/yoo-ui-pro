@@ -9,6 +9,8 @@ import { defineComponent, ref, onMounted, watch, inject } from 'vue';
 import { Setting } from '@element-plus/icons-vue';
 import useNamespace from '@/hooks/use-namespace';
 import { SELECTION_COLUMN_KEY, INDEX_COLUMN_KEY } from '../../const';
+import useTableColumns from '@/hooks/use-table-columns/index';
+import type { TableColumnType } from '../../types';
 
 export default defineComponent({
   name: 'ColumnsSetup',
@@ -18,11 +20,11 @@ export default defineComponent({
   emits: ['updateColumns'],
   setup(props, { emit }) {
     const ns = useNamespace('table');
-    const columns = inject('columns') as any[];
+    const { columns } = useTableColumns();
     const checkAll = ref(true);
     const isIndeterminate = ref(false);
     const checkedColumns = ref<string[]>([]);
-    const localColumns = ref<any[]>([]);
+    const localColumns = ref<TableColumnType[]>([]);
 
     onMounted(() => {
       watch(
@@ -34,9 +36,9 @@ export default defineComponent({
       );
     });
 
-    const setLocalColumns = (val: any[]) => {
+    const setLocalColumns = (val: TableColumnType[]) => {
       const keys: string[] = [];
-      localColumns.value = val.map((item: any) => {
+      localColumns.value = val.map((item: TableColumnType) => {
         let c = { ...item };
         if (!item.prop) {
           if (item.type === SELECTION_COLUMN_KEY) {
@@ -61,14 +63,16 @@ export default defineComponent({
     };
 
     const handleCheckAllChange = (checked: boolean) => {
-      checkedColumns.value = checked ? localColumns.value.map((item: any) => item.prop) : [];
+      checkedColumns.value = checked
+        ? localColumns.value.map((item: TableColumnType) => item.prop)
+        : [];
       isIndeterminate.value = false;
       checkAll.value = checked;
       handleEmitUpdate();
     };
 
     const handleEmitUpdate = () => {
-      const resColumns = localColumns.value.filter((item: any) => {
+      const resColumns = localColumns.value.filter((item: TableColumnType) => {
         return checkedColumns.value.includes(item.prop);
       });
       emit('updateColumns', resColumns);
@@ -105,7 +109,7 @@ export default defineComponent({
               </div>
               <div class={ns.be('columns-setup', 'content')}>
                 <el-checkbox-group modelValue={checkedColumns.value} onChange={onChangeColumns}>
-                  {localColumns.value.map((column: any) => {
+                  {localColumns.value.map((column: TableColumnType) => {
                     return (
                       <el-checkbox key={column.prop} label={column.prop}>
                         {column.label}
