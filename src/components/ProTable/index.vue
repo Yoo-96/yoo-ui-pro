@@ -5,7 +5,16 @@
  * @Date: 2022-03-04 15:54:33
  * @Description:
  */
-import { defineComponent, toRefs, onMounted, ref, reactive, PropType, provide } from 'vue';
+import {
+  defineComponent,
+  toRefs,
+  onMounted,
+  ref,
+  reactive,
+  PropType,
+  provide,
+  readonly,
+} from 'vue';
 import ProTableList from './components/TableList/index.vue';
 import ProTableToolbar from './components/Toolbar/index.vue';
 import ProTablePagination from './components/Pagination/index.vue';
@@ -15,10 +24,18 @@ import type {
   LocalPagination,
   RequestData,
   RequestType,
+  BeforeSubmitType,
   ToolbarType,
   TableColumnType,
+  SearchBarConfigType,
+  SearchFormDataType,
 } from './types';
-import { DEFAULT_ROW_KEY } from './const';
+import {
+  DEFAULT_ROW_KEY,
+  DEFAULT_SEARCH_BAR_CONFIG,
+  DEFAULT_PAGE_SIZE,
+  DEFAULT_CURRENT_PAGE,
+} from './const';
 
 export default defineComponent({
   name: 'ProTable',
@@ -40,6 +57,10 @@ export default defineComponent({
       type: Function as PropType<RequestType>,
       required: true,
     },
+    beforeSubmit: {
+      type: Function as PropType<BeforeSubmitType>,
+      required: true,
+    },
     rowKey: {
       type: String,
       default: DEFAULT_ROW_KEY,
@@ -56,13 +77,20 @@ export default defineComponent({
       type: Object,
       default: () => {},
     },
+
+    // -------- 搜索栏模块属性 --------
+    searchBarConfig: {
+      type: Object as PropType<SearchBarConfigType>,
+      default: DEFAULT_SEARCH_BAR_CONFIG,
+    },
   },
   setup(props, { expose }) {
     const ns = useNamespace('table');
     const proTableRef = ref();
 
-    const { columns, toolbar, request, paginationConfig, rowKey } = toRefs(props);
-    provide('columns', columns.value);
+    const { columns, toolbar, request, beforeSubmit, paginationConfig, rowKey, searchBarConfig } =
+      toRefs(props);
+    provide('columns', readonly(columns.value));
 
     // 列表数据
     let localDataSource = ref<any[]>([]);
@@ -71,10 +99,15 @@ export default defineComponent({
     // 数据总量
     let dataTotal = ref<number>(0);
     // 分页信息
-    let localPagination = reactive<LocalPagination>({ pageSize: 10, currentPage: 1 });
+    let localPagination = reactive<LocalPagination>({
+      pageSize: DEFAULT_PAGE_SIZE,
+      currentPage: DEFAULT_CURRENT_PAGE,
+    });
+    // 搜索表单值
+    let searchFormData = reactive<SearchFormDataType>({});
 
     // -------- 计算列配置开始 --------
-    let currentColumns = ref<TableColumnType>([]); // 需要显示的列
+    let currentColumns = ref<TableColumnType[]>([]); // 需要显示的列
 
     const handleUpdateColumns = (value: TableColumnType[]) => {
       currentColumns.value = value;
@@ -86,14 +119,16 @@ export default defineComponent({
     });
 
     // 请求数据
-    const fetchData = ({ pageSize = 10, currentPage = 1 }) => {
+    const fetchData = ({ pageSize = DEFAULT_PAGE_SIZE, currentPage = DEFAULT_CURRENT_PAGE }) => {
       loading.value = true;
       const params = {
+        ...searchFormData,
         pageSize,
         currentPage,
       };
+      const fetchParams = beforeSubmit.value(params);
       request
-        .value(params)
+        .value(fetchParams)
         .then((res: RequestData<any>) => {
           const { total, data, success, ...rest } = res;
 
@@ -122,8 +157,8 @@ export default defineComponent({
      */
     const refresh = (reset?: boolean) => {
       const params = {
-        pageSize: reset ? 10 : localPagination.pageSize,
-        currentPage: reset ? 1 : localPagination.currentPage,
+        pageSize: reset ? DEFAULT_PAGE_SIZE : localPagination.pageSize,
+        currentPage: reset ? DEFAULT_CURRENT_PAGE : localPagination.currentPage,
       };
       fetchData(params);
     };
@@ -131,6 +166,22 @@ export default defineComponent({
     // 清空选中
     const clearSelection = () => {
       proTableRef.value?.clearSelection();
+    };
+
+    // 搜索
+    const onSearch = (formData: SearchFormDataType) => {
+      Object.assign(searchFormData, formData);
+      fetchData(localPagination);
+    };
+
+    // 重置
+    const onReset = () => {
+      const params = {
+        pageSize: DEFAULT_PAGE_SIZE,
+        currentPage: DEFAULT_CURRENT_PAGE,
+      };
+      searchFormData = {};
+      fetchData(params);
     };
 
     // 对外暴露属性和方法
@@ -142,6 +193,14 @@ export default defineComponent({
     return () => {
       return (
         <div class={ns.b()}>
+          {searchBarConfig.value.show && (
+            <SearchBar
+              searchBarConfig={searchBarConfig.value}
+              onSearch={onSearch}
+              onReset={onReset}
+            />
+          )}
+
           {toolbar.value.show && (
             <ProTableToolbar
               toolbar={toolbar.value}

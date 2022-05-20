@@ -5,7 +5,7 @@
  * @Date: 2022-04-05 11:19:05
  * @Description:
  */
-import { defineComponent, ref, onMounted, watch, inject } from 'vue';
+import { defineComponent, ref, onMounted, watch } from 'vue';
 import { Setting } from '@element-plus/icons-vue';
 import useNamespace from '@/hooks/use-namespace';
 import { SELECTION_COLUMN_KEY, INDEX_COLUMN_KEY } from '../../const';
@@ -38,18 +38,20 @@ export default defineComponent({
 
     const setLocalColumns = (val: TableColumnType[]) => {
       const keys: string[] = [];
-      localColumns.value = val.map((item: TableColumnType) => {
-        let c = { ...item };
-        if (!item.prop) {
-          if (item.type === SELECTION_COLUMN_KEY) {
-            c.prop = SELECTION_COLUMN_KEY;
-          } else if (item.type === INDEX_COLUMN_KEY) {
-            c.prop = INDEX_COLUMN_KEY;
+      localColumns.value = val
+        .filter((item: TableColumnType) => !item.hideInTable)
+        .map((item: TableColumnType) => {
+          let c = { ...item };
+          if (!item.prop) {
+            if (item.type === SELECTION_COLUMN_KEY) {
+              c.prop = SELECTION_COLUMN_KEY;
+            } else if (item.type === INDEX_COLUMN_KEY) {
+              c.prop = INDEX_COLUMN_KEY;
+            }
           }
-        }
-        keys.push(c.prop);
-        return c;
-      });
+          keys.push(c.prop);
+          return c;
+        });
       checkedColumns.value = keys;
       handleEmitUpdate();
     };

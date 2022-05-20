@@ -5,7 +5,7 @@
  * @Date: 2022-03-04 15:56:15
  * @Description:
  */
-import { defineComponent, PropType, toRefs, computed } from 'vue';
+import { defineComponent, PropType, toRefs } from 'vue';
 import useNamespace from '@/hooks/use-namespace';
 import { LocalPagination } from '../../types';
 

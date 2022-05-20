@@ -7,6 +7,7 @@
       ref="proTable"
       :columns="columns"
       :request="getData"
+      :before-submit="beforeSubmit"
       row-key="id"
       :toolbar="{
         show: true,
@@ -17,6 +18,12 @@
         pageSizes: [10, 20, 30, 40],
         layout: 'total, sizes, prev, pager, next, jumper',
         small: true,
+      }"
+      :search-bar-config="{
+        show: true,
+        gutter: 12,
+        span: 8,
+        labelWidth: 80,
       }"
     >
     </pro-table>
@@ -49,11 +56,20 @@ export default defineComponent({
         prop: 'name',
         label: '姓名',
         // width: 150,
+        isSearch: true,
+        fieldType: 'text',
       },
       {
         prop: 'gender',
         label: '性别',
+        isSearch: true,
         // width: 150,
+        fieldType: 'select',
+        valueEnum: {
+          0: { text: '女' },
+          1: { text: '男' },
+        },
+        placeholder: '请选择性别',
         render: (text: number) => (text === 1 ? '男' : '女'),
       },
       {
@@ -64,22 +80,38 @@ export default defineComponent({
       {
         prop: 'email',
         label: '邮箱',
+        isSearch: true,
         // width: 150,
       },
       {
         prop: 'phone',
         label: '手机号',
+        isSearch: true,
         // width: 150,
       },
       {
         prop: 'wx',
         label: '微信号',
+        isSearch: true,
         // width: 150,
       },
       {
         prop: 'address',
         label: '地址',
+        isSearch: true,
         // width: 150,
+      },
+      {
+        prop: 'age',
+        label: '创建时间',
+        isSearch: true,
+        fieldType: 'data',
+        hideInTable: true,
+        fieldProps: {
+          type: 'daterange',
+          startPlaceholder: '开始日期',
+          endPlaceholder: '结束日期',
+        },
       },
       {
         prop: 'action',
@@ -88,10 +120,10 @@ export default defineComponent({
         render: (text: number, record: UserInfoType) => {
           return (
             <>
-              <el-button type="text" size="small">
+              <el-button text size="small">
                 编辑
               </el-button>
-              <el-button type="text" size="small">
+              <el-button text size="small">
                 删除
               </el-button>
             </>
@@ -100,7 +132,16 @@ export default defineComponent({
       },
     ];
 
+    const beforeSubmit = (params: { [key: string]: any }): { [key: string]: any } => {
+      const fetchParams = {
+        ...params,
+        action: '列表请求',
+      };
+      return fetchParams;
+    };
+
     const getData = async (params: { [key: string]: any }): Promise<RequestData> => {
+      console.log('request params: ', params);
       const {
         success,
         result: { pageSize, currentPage, total, data },
@@ -128,6 +169,7 @@ export default defineComponent({
       proTable,
       columns,
       getData,
+      beforeSubmit,
       onRefresh,
       onClearSelection,
     };
