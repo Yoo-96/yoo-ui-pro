@@ -6,7 +6,7 @@
  * @Description:
  */
 import { defineComponent, toRefs, ref, PropType } from 'vue';
-import useNamespace from '@/hooks/use-namespace';
+import useNamespace from '@yui/hooks/use-namespace';
 import type { ElTable } from 'element-plus';
 import { DEFAULT_ROW_KEY } from '../../const';
 import type { TableColumnType } from '../../types';

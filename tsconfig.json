@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -15,15 +16,16 @@
     ],
     "paths": {
       "@/*": [
-        "./src/*"
+        "./*"
       ],
+      "@yui/*": [
+        "./packages/*"
+      ]
     }
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
+    "examples",
+    "packages",
     "components.d.ts",
     "auto-imports.d.ts"
   ],

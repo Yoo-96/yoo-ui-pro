@@ -6,7 +6,7 @@
  * @Description:
  */
 import { defineComponent, PropType, toRefs } from 'vue';
-import useNamespace from '@/hooks/use-namespace';
+import useNamespace from '@yui/hooks/use-namespace';
 import { LocalPagination } from '../../types';
 
 export default defineComponent({

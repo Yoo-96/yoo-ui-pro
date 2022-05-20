@@ -6,8 +6,8 @@
  * @Description:
  */
 import { defineComponent, toRefs, PropType, computed, reactive, isRef, ref } from 'vue';
-import useNamespace from '@/hooks/use-namespace';
-import useTableColumns from '@/hooks/use-table-columns/index';
+import useNamespace from '@yui/hooks/use-namespace';
+import useTableColumns from '@yui/hooks/use-table-columns/index';
 import SearchItem from './SearchItem/index.vue';
 import type { TableColumnType, SearchBarConfigType, SearchFormDataType } from '../../types';
 import {

@@ -19,7 +19,7 @@ import ProTableList from './components/TableList/index.vue';
 import ProTableToolbar from './components/Toolbar/index.vue';
 import ProTablePagination from './components/Pagination/index.vue';
 import SearchBar from './components/SearchBar/index.vue';
-import useNamespace from '@/hooks/use-namespace';
+import useNamespace from '@yui/hooks/use-namespace';
 import type {
   LocalPagination,
   RequestData,

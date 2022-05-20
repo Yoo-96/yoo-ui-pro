@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from '@/router/index';
+import router from '@examples/router/index';
 
-import '@/assets/css/index.less';
+import '@examples/assets/css/index.less';
 
 const app = createApp(App);
 app.use(router);

@@ -32,12 +32,16 @@
 
 <script lang="tsx">
 import { defineComponent, ref } from 'vue';
-import { UserRequestResultType, RequestData } from '@/types/user';
-import { fetchUsetList } from '@/api/user';
-import { UserInfoType } from '@/types/user';
+import ProTable from '@packages/components/ProTable/index.vue';
+import { UserRequestResultType, RequestData } from '@examples/types/user';
+import { fetchUsetList } from '@examples/api/user';
+import { UserInfoType } from '@examples/types/user';
 
 export default defineComponent({
   name: 'ProTableExample',
+  components: {
+    ProTable,
+  },
   setup() {
     const proTable = ref();
 

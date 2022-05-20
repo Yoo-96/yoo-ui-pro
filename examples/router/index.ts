@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/pro-table',
     name: 'ProTableExample',
-    component: () => import('@/views/ProTableExample/index.vue'),
+    component: () => import('@examples/views/ProTableExample/index.vue'),
   },
 ];
 

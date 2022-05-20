@@ -7,9 +7,9 @@
  */
 import { defineComponent, ref, onMounted, watch } from 'vue';
 import { Setting } from '@element-plus/icons-vue';
-import useNamespace from '@/hooks/use-namespace';
+import useNamespace from '@yui/hooks/use-namespace';
+import useTableColumns from '@yui/hooks/use-table-columns';
 import { SELECTION_COLUMN_KEY, INDEX_COLUMN_KEY } from '../../const';
-import useTableColumns from '@/hooks/use-table-columns/index';
 import type { TableColumnType } from '../../types';
 
 export default defineComponent({

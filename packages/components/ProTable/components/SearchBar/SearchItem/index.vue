@@ -11,9 +11,9 @@ import {
   DEFAULT_FORM_ITEM_TYPE,
   DEFAULT_PLACEHOLDER,
   DEFAULT_DATA_FIELD_TYPE,
-} from '@/components/ProTable/const';
-import { SearchItemModelValueType } from '@/components/ProTable/types';
-import useNamespace from '@/hooks/use-namespace';
+} from '@yui/components/ProTable/const';
+import { SearchItemModelValueType } from '@yui/components/ProTable/types';
+import useNamespace from '@yui/hooks/use-namespace';
 
 export default defineComponent({
   name: 'SearchItem',
