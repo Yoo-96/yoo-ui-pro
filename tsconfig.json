@@ -1,32 +1,48 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "target": "esnext",
     "useDefineForClassFields": true,
-    "module": "esnext",
+    "target": "ESNext",
+    "module": "ES6",
     "moduleResolution": "node",
+    // TODO:打包处理完后解决
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    // TODO:打包处理完后解决
+    "noImplicitAny": true,
+    // TODO: [暂时解决element-plus bug](https://github.com/element-plus/element-plus/issues/7265)
+    "skipLibCheck": true,
     "lib": [
       "esnext",
       "dom"
     ],
     "paths": {
-      "@/*": [
-        "./*"
+      "@packages/*": [
+        "./packages/*"
+      ],
+      "@examples/*": [
+        "./examples/*"
       ],
       "@yui/*": [
         "./packages/*"
       ]
     }
   },
+  "exclude": ["node_modules", "dist", "lib", "es"],
   "include": [
-    "examples",
-    "packages",
-    "components.d.ts",
-    "auto-imports.d.ts"
+    "examples/**/*.ts",
+    "examples/**/*.d.ts",
+    "examples/**/*.tsx",
+    "examples/**/*.vue",
+    "packages/**/*.ts",
+    "packages/**/*.d.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue",
+
+    // "components.d.ts",
+    // "auto-imports.d.ts"
   ],
 }

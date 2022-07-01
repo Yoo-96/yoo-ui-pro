@@ -29,13 +29,14 @@ import type {
   TableColumnType,
   SearchBarConfigType,
   SearchFormDataType,
+  DataItemType,
 } from './types';
 import {
   DEFAULT_ROW_KEY,
   DEFAULT_SEARCH_BAR_CONFIG,
   DEFAULT_PAGE_SIZE,
   DEFAULT_CURRENT_PAGE,
-} from './const';
+} from '@yui/components/ProTable/src/const';
 
 export default defineComponent({
   name: 'ProTable',
@@ -93,7 +94,7 @@ export default defineComponent({
     provide('columns', readonly(columns.value));
 
     // 列表数据
-    let localDataSource = ref<any[]>([]);
+    let localDataSource = ref<DataItemType[]>([]);
     // 列表加载
     let loading = ref<boolean>(false);
     // 数据总量
@@ -129,7 +130,7 @@ export default defineComponent({
       const fetchParams = beforeSubmit.value(params);
       request
         .value(fetchParams)
-        .then((res: RequestData<any>) => {
+        .then((res: RequestData<DataItemType>) => {
           const { total, data, success, ...rest } = res;
 
           if (success) {
@@ -205,6 +206,7 @@ export default defineComponent({
             <ProTableToolbar
               toolbar={toolbar.value}
               onRefresh={refresh}
+              // @ts-ignore
               onUpdateColumns={handleUpdateColumns}
             />
           )}

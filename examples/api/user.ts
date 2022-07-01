@@ -1,4 +1,4 @@
-import { UserInfoType, UserRequestResultType } from '@/types/user';
+import { UserInfoType, UserRequestResultType } from '@examples/types/user';
 
 export const fetchUsetList = async (params: any): Promise<UserRequestResultType> => {
   return new Promise((resolve) => {

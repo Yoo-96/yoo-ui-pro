@@ -32,7 +32,7 @@
 
 <script lang="tsx">
 import { defineComponent, ref } from 'vue';
-import ProTable from '@packages/components/ProTable/index.vue';
+import ProTable from '@packages/components/ProTable';
 import { UserRequestResultType, RequestData } from '@examples/types/user';
 import { fetchUsetList } from '@examples/api/user';
 import { UserInfoType } from '@examples/types/user';

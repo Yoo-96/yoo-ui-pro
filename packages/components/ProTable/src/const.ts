@@ -41,3 +41,6 @@ export const DEFAULT_PLACEHOLDER: { [key: string]: string } = {
 
 // 搜索栏 data 项默认类型
 export const DEFAULT_DATA_FIELD_TYPE = 'date';
+
+// 搜索栏 DatePicker 默认size
+export const DATE_PICKER_DEFAULT_SIZE = 'small';

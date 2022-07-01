@@ -7,7 +7,7 @@
  */
 import { defineComponent, toRefs, PropType } from 'vue';
 import { RefreshRight } from '@element-plus/icons-vue';
-import FullScreenIcon from '@yui/components/FullScreenIcon/index.vue';
+import FullScreenIcon from '@yui/components/FullScreenIcon';
 import ColumnsSetup from '../ColumnsSetup/index.vue';
 import useNamespace from '@yui/hooks/use-namespace';
 import type { ToolbarType } from '../../types';

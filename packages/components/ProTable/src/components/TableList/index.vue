@@ -55,13 +55,13 @@ export default defineComponent({
             rowKey={rowKey.value}
             v-loading={loading.value}
           >
-            {(columns.value || []).map((column: TableColumnType) => {
+            {(columns.value || []).map((column: TableColumnType, index: number) => {
               const { render, ...restColumn } = column;
 
-              if (typeof render === 'function') {
+              if (render && typeof render === 'function') {
                 return (
                   <el-table-column
-                    key={restColumn.prop}
+                    key={index}
                     {...restColumn}
                     v-slots={{
                       default: (scope: any) =>
@@ -70,7 +70,7 @@ export default defineComponent({
                   />
                 );
               }
-              return <el-table-column key={restColumn.prop} {...restColumn} />;
+              return <el-table-column key={index} {...restColumn} />;
             })}
           </el-table>
         </div>

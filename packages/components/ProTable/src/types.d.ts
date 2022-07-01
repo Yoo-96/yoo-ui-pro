@@ -4,13 +4,8 @@
  * @Date: 2022-03-04 15:54:14
  * @Description:
  */
-export interface ListResultType {
-  data: { [key: string]: any };
-  total: number;
-  currentPage: number;
-  pageSize: number;
-  success: boolean;
-}
+
+export type DataItemType = { [key: string]: any };
 
 // 分页类型定义
 export interface LocalPagination {
@@ -28,7 +23,7 @@ export interface RequestData<T> {
 }
 
 // 列表数据请求方法类型定义
-export type RequestType = (params: SearchFormDataType) => Promise<RequestData<any>>;
+export type RequestType = (params: SearchFormDataType) => Promise<RequestData<DataItemType>>;
 
 export type BeforeSubmitType = (params: SearchFormDataType) => SearchFormDataType;
 
@@ -39,7 +34,7 @@ export interface ToolbarType {
   setting?: ('refresh' | 'fullScreen' | 'columnsSetup')[];
 }
 
-// todo elementPlus 没有导出，临时处理
+// TODO elementPlus 没有导出，临时处理
 type ElementColumnType = any;
 // 表格column类型定义
 type ColumnValueEnumType = {
@@ -54,7 +49,10 @@ export interface TableColumnType extends ElementColumnType {
   valueEnum?: ColumnValueEnumType;
   fieldProps?: object;
   placeholder?: string;
+  render?: (text: any, record: DataItemType, index: number) => any;
 }
+
+// (text: number) => (text === 1 ? '男' : '女'),
 
 // 搜索栏类型定义
 interface ColConfigType {
@@ -74,7 +72,7 @@ export interface SearchBarConfigType {
 
 // 搜索栏参数类型定义
 export interface SearchFormDataType {
-  [key: string]: any;
+  [key: string]: SearchItemModelValueType;
 }
 
 // 搜索项modelValue类型定义

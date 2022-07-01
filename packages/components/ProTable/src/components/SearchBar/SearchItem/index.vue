@@ -11,8 +11,9 @@ import {
   DEFAULT_FORM_ITEM_TYPE,
   DEFAULT_PLACEHOLDER,
   DEFAULT_DATA_FIELD_TYPE,
-} from '@yui/components/ProTable/const';
-import { SearchItemModelValueType } from '@yui/components/ProTable/types';
+  DATE_PICKER_DEFAULT_SIZE,
+} from '@yui/components/ProTable/src/const';
+import { SearchItemModelValueType } from '@yui/components/ProTable/src/types';
 import useNamespace from '@yui/hooks/use-namespace';
 
 export default defineComponent({
@@ -88,7 +89,7 @@ export default defineComponent({
       } else if (currentFieldType === 'data') {
         const dataFieldProps = {
           type: DEFAULT_DATA_FIELD_TYPE,
-          size: 'default',
+          size: DATE_PICKER_DEFAULT_SIZE,
           ...currentFieldProps,
         };
         return <el-date-picker {...dataFieldProps} v-model={localValue.value} onChange={onInput} />;

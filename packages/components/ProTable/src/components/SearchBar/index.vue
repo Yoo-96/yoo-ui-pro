@@ -79,7 +79,7 @@ export default defineComponent({
           <el-form ref={searchFormRef} model={formData} labelWidth={labelWidth.value}>
             <el-row gutter={gutter.value}>
               {columns
-                .filter((column: TableColumnType) => column.isSearch)
+                .filter((column: TableColumnType) => !!column.isSearch)
                 .map((column: TableColumnType) => {
                   return (
                     <el-col {...colConfig.value}>
