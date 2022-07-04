@@ -6,7 +6,7 @@ ProTable 是基于 [element-plus table](https://element-plus.org/zh-CN/component
 
 ## 代码示例
 
-```js
+```vue
 <template>
   <div class="example">
     <el-button @click="onRefresh(false)">当前页刷新</el-button>
