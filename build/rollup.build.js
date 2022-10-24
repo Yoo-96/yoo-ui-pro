@@ -9,7 +9,7 @@ import postcss from 'rollup-plugin-postcss';
 import typescript2 from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
 
-const pkg = require('./package.json');
+const pkg = require('../package.json');
 
 const createBanner = () => {
   return `/*!
